@@ -1,7 +1,8 @@
-package com.example.bartusis.petras.newsapp
+package com.example.bartusis.petras.newsapp.main.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.bartusis.petras.newsapp.R
 
 class MainActivity : AppCompatActivity() {
 
