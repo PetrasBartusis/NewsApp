@@ -1,4 +1,4 @@
-package com.example.bartusis.petras.newsapp.main.main
+package com.example.bartusis.petras.newsapp.main.main.newsList
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
