@@ -15,6 +15,7 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
         super.onCreate(savedInstanceState)
         presenter = NewsListPresenter()
         presenter.takeView(this)
+        presenter.getNewsList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

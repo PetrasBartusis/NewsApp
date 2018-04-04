@@ -9,5 +9,6 @@ interface NewsListContract {
 
     interface Presenter : BasePresenter<View> {
         fun onViewReady()
+        fun getNewsList()
     }
 }
