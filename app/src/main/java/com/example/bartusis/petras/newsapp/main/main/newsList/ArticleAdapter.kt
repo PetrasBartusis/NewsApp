@@ -5,15 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.bartusis.petras.newsapp.R
 
-class ArticleAdapter(
-        private val imageLoader: ImageLoader
+class ArticleAdapter (
+        private val imageLoader: ImageLoader,
+        private val listener: OnArticleClickListener
 ) : RecyclerView.Adapter<ArticleViewHolder>() {
     private val list = mutableListOf<Article>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.article_list_item, parent, false)
-        return ArticleViewHolder(itemView, imageLoader)
+        return ArticleViewHolder(itemView, imageLoader, listener)
     }
 
     override fun getItemCount() = list.size

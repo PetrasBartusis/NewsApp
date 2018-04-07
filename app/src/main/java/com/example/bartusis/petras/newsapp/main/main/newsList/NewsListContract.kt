@@ -8,10 +8,12 @@ interface NewsListContract {
         fun setNewsItems(news: News)
         fun setNewsItemsFromSharedPreferences()
         fun showError(message: Int)
+        fun startDetailsActivity(article: Article)
     }
 
     interface Presenter : BasePresenter<View> {
         fun onViewReady()
+        fun onArticleClicked(article: Article)
     }
 
     interface Model {

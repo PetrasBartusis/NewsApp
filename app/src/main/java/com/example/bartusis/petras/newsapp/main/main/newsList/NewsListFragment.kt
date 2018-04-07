@@ -7,12 +7,13 @@ import android.widget.Toast
 import com.example.bartusis.petras.newsapp.R
 import com.example.bartusis.petras.newsapp.main.main.base.BaseApplication
 import com.example.bartusis.petras.newsapp.main.main.base.BaseFragment
+import com.example.bartusis.petras.newsapp.main.main.newsDetails.NewsDetailsActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.io.Serializable
 
 class NewsListFragment : BaseFragment(), NewsListContract.View {
-
     private lateinit var presenter: NewsListContract.Presenter
 
     private var articleAdapter: ArticleAdapter? = null
@@ -21,13 +22,14 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
         super.onCreate(savedInstanceState)
         presenter = NewsListPresenter(
                 NewsListModel((context.applicationContext as BaseApplication).service!!),
-                (context.applicationContext as BaseApplication)
-                        .dependencyRetriever!!
-                        .sharedPreferences,
                 Schedulers.io(),
                 AndroidSchedulers.mainThread()
         )
-        articleAdapter = ArticleAdapter(GlideImageLoader())
+        articleAdapter = ArticleAdapter(GlideImageLoader(), object : OnArticleClickListener {
+            override fun onArticleClicked(article: Article) {
+                presenter.onArticleClicked(article)
+            }
+        })
         presenter.takeView(this)
     }
 
@@ -56,6 +58,12 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
 
     override fun showError(message: Int) {
         Toast.makeText(context, getString(message), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun startDetailsActivity (article: Article) {
+        startActivity(NewsDetailsActivity.createIntent(activity).putExtra(
+                Article.ARTICLE, article as Serializable
+        ))
     }
 
     override fun layoutRes() = R.layout.fragment_main
