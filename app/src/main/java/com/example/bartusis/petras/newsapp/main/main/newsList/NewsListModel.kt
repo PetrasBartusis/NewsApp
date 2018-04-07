@@ -1,5 +1,5 @@
 package com.example.bartusis.petras.newsapp.main.main.newsList
 
-class NewsListModel(newsApi: NewsApi){
-    val newsObservable = newsApi.getArticles()
+class NewsListModel(private val newsApi: NewsApi) : NewsListContract.Model{
+    override fun getNews() = newsApi.getArticles()
 }
