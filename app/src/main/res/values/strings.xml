@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="news_api_error">Error thrown when trying to get news articles!</string>
 </resources>

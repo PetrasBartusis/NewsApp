@@ -4,11 +4,11 @@ import com.example.bartusis.petras.newsapp.main.main.base.presenter.BasePresente
 
 interface NewsListContract {
     interface View {
-        fun showSuccess()
+        fun setNewsItems(news: News)
+        fun showError(message: Int)
     }
 
     interface Presenter : BasePresenter<View> {
         fun onViewReady()
-        fun getNewsList()
     }
 }
