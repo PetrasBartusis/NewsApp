@@ -7,8 +7,9 @@ import com.example.bartusis.petras.newsapp.R
 import com.example.bartusis.petras.newsapp.main.main.base.BaseFragment
 import com.example.bartusis.petras.newsapp.main.main.newsList.Article
 import com.example.bartusis.petras.newsapp.main.main.newsList.GlideImageLoader
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
+import android.content.Intent
+import android.net.Uri
 
 class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
 
@@ -23,8 +24,25 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewReady()
+    }
+
+    override fun setArticleData() {
         val article = arguments.getSerializable(Article.ARTICLE) as Article
-        Picasso.get().load(article.urlToImage.toString()).into(top_image as ImageView)
+        GlideImageLoader().loadFullImage(article.urlToImage.toString(), top_image, activity.windowManager)
+        setArticleText(article)
+        article_link_btn.setOnClickListener { openBrowserWithUrl(article)}
+    }
+
+    private fun openBrowserWithUrl(article: Article){
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url.toString()))
+        startActivity(browserIntent)
+    }
+
+    private fun setArticleText(article: Article){
+        article_title.text = article.title
+        article_description.text = article.description
+        article_author.text = article.author
+        article_date.text = article.publishedAt
     }
 
     override fun onDestroyView() {

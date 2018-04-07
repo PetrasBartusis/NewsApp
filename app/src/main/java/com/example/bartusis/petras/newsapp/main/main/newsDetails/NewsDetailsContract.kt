@@ -4,6 +4,7 @@ import com.example.bartusis.petras.newsapp.main.main.base.presenter.BasePresente
 
 interface NewsDetailsContract {
     interface View {
+        fun setArticleData()
     }
 
     interface Presenter : BasePresenter<View> {

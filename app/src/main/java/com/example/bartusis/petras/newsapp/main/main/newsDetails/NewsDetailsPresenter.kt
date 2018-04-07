@@ -5,7 +5,7 @@ import com.example.bartusis.petras.newsapp.main.main.base.presenter.BasePresente
 class NewsDetailsPresenter : BasePresenterImplemetation<NewsDetailsContract.View>(),
         NewsDetailsContract.Presenter {
     override fun onViewReady() {
-
+        onView { setArticleData() }
     }
 
 }

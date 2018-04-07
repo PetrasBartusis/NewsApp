@@ -13,7 +13,9 @@ class ArticleViewHolder(
         itemView.setOnClickListener {
             listener.onArticleClicked(article)
         }
-        imageLoader.load(article.urlToImage.toString(), itemView.image)
+        if(article.urlToImage!=null){
+            imageLoader.load(article.urlToImage.toString(), itemView.image)
+        }
         itemView.text_view.text = article.title
         itemView.date_view.text = article.publishedAt
     }
