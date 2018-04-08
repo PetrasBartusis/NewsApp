@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".main.main.newsList.NewsListActivity" />
-        <activity android:name=".main.main.newsDetails.NewsDetailsActivity" />
+        <activity android:name=".main.main.newsDetails.NewsDetailsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".main.main.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
