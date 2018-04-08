@@ -26,11 +26,14 @@ class NewsListFragment : BaseFragment(), NewsListContract.View, SwipeRefreshLayo
                 Schedulers.io(),
                 AndroidSchedulers.mainThread()
         )
-        articleAdapter = ArticleAdapter(GlideImageLoader(), object : OnArticleClickListener {
-            override fun onArticleClicked(article: Article) {
-                presenter.onArticleClicked(article)
-            }
-        })
+        articleAdapter = ArticleAdapter(
+                GlideImageLoader(), object : OnArticleClickListener {
+                    override fun onArticleClicked(article: Article) {
+                        presenter.onArticleClicked(article)
+                    }
+                },
+                (context.applicationContext as BaseApplication).dependencyRetriever!!.dateFormatter
+        )
         presenter.takeView(this)
     }
 

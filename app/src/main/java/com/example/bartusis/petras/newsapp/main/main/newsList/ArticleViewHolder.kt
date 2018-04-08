@@ -2,12 +2,14 @@ package com.example.bartusis.petras.newsapp.main.main.newsList
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.example.bartusis.petras.newsapp.main.main.base.DateFormatter
 import kotlinx.android.synthetic.main.article_list_item.view.*
 
 class ArticleViewHolder(
         itemView: View,
         private val imageLoader: ImageLoader,
-        private val listener: OnArticleClickListener
+        private val listener: OnArticleClickListener,
+        private val dateFormatter: DateFormatter
 ) : RecyclerView.ViewHolder(itemView) {
     fun bind(article: Article) {
         itemView.setOnClickListener {
@@ -17,6 +19,6 @@ class ArticleViewHolder(
             imageLoader.load(article.urlToImage.toString(), itemView.image)
         }
         itemView.text_view.text = article.title
-        itemView.date_view.text = article.publishedAt
+        itemView.date_view.text = dateFormatter.format(article.publishedAt)
     }
 }

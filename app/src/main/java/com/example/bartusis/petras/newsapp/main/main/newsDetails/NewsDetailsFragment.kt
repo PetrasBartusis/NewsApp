@@ -10,6 +10,7 @@ import com.example.bartusis.petras.newsapp.main.main.newsList.GlideImageLoader
 import kotlinx.android.synthetic.main.fragment_details.*
 import android.content.Intent
 import android.net.Uri
+import com.example.bartusis.petras.newsapp.main.main.base.BaseApplication
 
 class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
 
@@ -42,7 +43,8 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
         article_title.text = article.title
         article_description.text = article.description
         article_author.text = article.author
-        article_date.text = article.publishedAt
+        article_date.text = (context.applicationContext as BaseApplication).
+                dependencyRetriever!!.dateFormatter.format(article.publishedAt)
     }
 
     override fun onDestroyView() {
