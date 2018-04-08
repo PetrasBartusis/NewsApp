@@ -1,6 +1,7 @@
 package com.example.bartusis.petras.newsapp.main.main.newsList
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
@@ -13,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.io.Serializable
 
-class NewsListFragment : BaseFragment(), NewsListContract.View {
+class NewsListFragment : BaseFragment(), NewsListContract.View, SwipeRefreshLayout.OnRefreshListener {
     private lateinit var presenter: NewsListContract.Presenter
 
     private var articleAdapter: ArticleAdapter? = null
@@ -36,6 +37,7 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onViewReady()
+        refresh_layout.setOnRefreshListener(this)
         list.layoutManager = LinearLayoutManager(activity)
         list.adapter = articleAdapter
     }
@@ -51,16 +53,25 @@ class NewsListFragment : BaseFragment(), NewsListContract.View {
                 .dependencyRetriever!!.sharedPreferences.setNews(news)
     }
 
+    override fun onRefresh() {
+        refresh_layout.isRefreshing = true
+        presenter.onSwipeLayoutRefresh()
+    }
+
+    override fun stopRefreshing() {
+        refresh_layout.isRefreshing = false
+    }
+
     override fun setNewsItemsFromSharedPreferences() {
         articleAdapter?.setItems((context.applicationContext as BaseApplication)
-                    .dependencyRetriever!!.sharedPreferences.getNews().articles)
+                .dependencyRetriever!!.sharedPreferences.getNews().articles)
     }
 
     override fun showError(message: Int) {
         Toast.makeText(context, getString(message), Toast.LENGTH_SHORT).show()
     }
 
-    override fun startDetailsActivity (article: Article) {
+    override fun startDetailsActivity(article: Article) {
         startActivity(NewsDetailsActivity.createIntent(activity).putExtra(
                 Article.ARTICLE, article as Serializable
         ))

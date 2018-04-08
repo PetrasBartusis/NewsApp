@@ -24,6 +24,11 @@ class NewsListPresenter(
                         { onView { setNewsItemsFromSharedPreferences() } })
     }
 
+    override fun onSwipeLayoutRefresh() {
+        getNews()
+        onView { stopRefreshing() }
+    }
+
     override fun dropView() {
         disposable.dispose()
         super.dropView()

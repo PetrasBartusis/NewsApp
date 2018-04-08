@@ -9,10 +9,12 @@ interface NewsListContract {
         fun setNewsItemsFromSharedPreferences()
         fun showError(message: Int)
         fun startDetailsActivity(article: Article)
+        fun stopRefreshing()
     }
 
     interface Presenter : BasePresenter<View> {
         fun onViewReady()
+        fun onSwipeLayoutRefresh()
         fun onArticleClicked(article: Article)
     }
 
