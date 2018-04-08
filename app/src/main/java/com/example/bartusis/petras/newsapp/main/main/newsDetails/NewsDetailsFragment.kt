@@ -29,7 +29,12 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
 
     override fun setArticleData() {
         val article = arguments.getSerializable(Article.ARTICLE) as Article
-        GlideImageLoader().loadFullImage(article.urlToImage.toString(), top_image, activity.windowManager)
+        if(article.urlToImage!=null){
+            GlideImageLoader().loadFullImage(
+                    article.urlToImage.toString(),
+                    top_image,
+                    activity.windowManager)
+        }
         setArticleText(article)
         article_link_btn.setOnClickListener { openBrowserWithUrl(article) }
     }
