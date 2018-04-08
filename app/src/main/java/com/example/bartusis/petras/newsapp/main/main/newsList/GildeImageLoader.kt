@@ -15,7 +15,7 @@ class GlideImageLoader : ImageLoader {
     }
 
     override fun load(url: String, imageView: ImageView) {
-        Picasso.get().load(url).resize(240, 160).into(imageView)
+        Picasso.get().load(url).resize(240, 180).into(imageView)
     }
 
 }
