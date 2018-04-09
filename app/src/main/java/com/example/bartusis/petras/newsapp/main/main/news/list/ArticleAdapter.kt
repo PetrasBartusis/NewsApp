@@ -1,10 +1,11 @@
-package com.example.bartusis.petras.newsapp.main.main.newsList
+package com.example.bartusis.petras.newsapp.main.main.news.list
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.bartusis.petras.newsapp.R
 import com.example.bartusis.petras.newsapp.main.main.base.DateFormatter
+import com.example.bartusis.petras.newsapp.main.main.news.Article
 
 class ArticleAdapter (
         private val imageLoader: ImageLoader,

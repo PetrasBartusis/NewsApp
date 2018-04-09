@@ -1,5 +1,6 @@
-package com.example.bartusis.petras.newsapp.main.main.newsList
+package com.example.bartusis.petras.newsapp.main.main.news.list
 
+import com.example.bartusis.petras.newsapp.main.main.news.News
 import io.reactivex.Observable
 import retrofit2.http.GET
 

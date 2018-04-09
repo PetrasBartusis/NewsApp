@@ -1,7 +1,7 @@
 package com.example.bartusis.petras.newsapp.main.main.base.data
 
 import android.content.Context
-import com.example.bartusis.petras.newsapp.main.main.newsList.News
+import com.example.bartusis.petras.newsapp.main.main.news.News
 import com.google.gson.Gson
 
 class PreferenceData(private val context: Context) : PreferenceManager {

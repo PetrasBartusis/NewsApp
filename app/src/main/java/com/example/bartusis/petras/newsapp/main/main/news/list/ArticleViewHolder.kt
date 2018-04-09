@@ -1,8 +1,9 @@
-package com.example.bartusis.petras.newsapp.main.main.newsList
+package com.example.bartusis.petras.newsapp.main.main.news.list
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.example.bartusis.petras.newsapp.main.main.base.DateFormatter
+import com.example.bartusis.petras.newsapp.main.main.news.Article
 import kotlinx.android.synthetic.main.article_list_item.view.*
 
 class ArticleViewHolder(

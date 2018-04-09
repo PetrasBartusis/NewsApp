@@ -1,6 +1,8 @@
-package com.example.bartusis.petras.newsapp.main.main.newsList
+package com.example.bartusis.petras.newsapp.main.main.news.list
 
 import com.example.bartusis.petras.newsapp.main.main.base.presenter.BasePresenter
+import com.example.bartusis.petras.newsapp.main.main.news.Article
+import com.example.bartusis.petras.newsapp.main.main.news.News
 import io.reactivex.Observable
 
 interface NewsListContract {
@@ -19,6 +21,7 @@ interface NewsListContract {
     }
 
     interface Model {
-        fun getNews() : Observable<News>
-    }
+        fun getNews(): Observable<News>
+        fun getCachedNews(): News
+        fun saveNews(news: News)    }
 }

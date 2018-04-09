@@ -1,11 +1,12 @@
-package com.example.bartusis.petras.newsapp.main.main.newsList
+package com.example.bartusis.petras.newsapp.main.main.news
 
 import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import android.graphics.Point
 import android.view.WindowManager
+import com.example.bartusis.petras.newsapp.main.main.news.list.ImageLoader
 
-class GlideImageLoader : ImageLoader {
+class PicassoImageLoader : ImageLoader {
 
     override fun loadFullImage(url: String, imageView: ImageView, windowManager: WindowManager) {
         val display = windowManager.defaultDisplay
@@ -17,5 +18,4 @@ class GlideImageLoader : ImageLoader {
     override fun load(url: String, imageView: ImageView) {
         Picasso.get().load(url).resize(240, 180).into(imageView)
     }
-
 }

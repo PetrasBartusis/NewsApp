@@ -1,4 +1,4 @@
-package com.example.bartusis.petras.newsapp.main.main.newsList
+package com.example.bartusis.petras.newsapp.main.main.news.list
 
 import android.content.Context
 import android.content.Intent

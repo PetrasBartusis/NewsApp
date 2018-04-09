@@ -1,4 +1,4 @@
-package com.example.bartusis.petras.newsapp.main.main.newsList
+package com.example.bartusis.petras.newsapp.main.main.news.list
 
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
@@ -8,7 +8,12 @@ import android.widget.Toast
 import com.example.bartusis.petras.newsapp.R
 import com.example.bartusis.petras.newsapp.main.main.base.BaseApplication
 import com.example.bartusis.petras.newsapp.main.main.base.BaseFragment
-import com.example.bartusis.petras.newsapp.main.main.newsDetails.NewsDetailsActivity
+import com.example.bartusis.petras.newsapp.main.main.base.DateFormatterImpl
+import com.example.bartusis.petras.newsapp.main.main.base.data.dependencyRetriever
+import com.example.bartusis.petras.newsapp.main.main.news.Article
+import com.example.bartusis.petras.newsapp.main.main.news.News
+import com.example.bartusis.petras.newsapp.main.main.news.PicassoImageLoader
+import com.example.bartusis.petras.newsapp.main.main.news.details.NewsDetailsActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -21,24 +26,33 @@ class NewsListFragment : BaseFragment(), NewsListContract.View, SwipeRefreshLayo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setUpPresenter()
+    }
+
+    private fun setUpPresenter(){
+        val dependencyRetriever = context.dependencyRetriever
         presenter = NewsListPresenter(
-                NewsListModel((context.applicationContext as BaseApplication).service!!),
+                NewsListModel(dependencyRetriever.service, dependencyRetriever.sharedPreferences),
                 Schedulers.io(),
                 AndroidSchedulers.mainThread()
-        )
-        articleAdapter = ArticleAdapter(
-                GlideImageLoader(), object : OnArticleClickListener {
-                    override fun onArticleClicked(article: Article) {
-                        presenter.onArticleClicked(article)
-                    }
-                },
-                (context.applicationContext as BaseApplication).dependencyRetriever!!.dateFormatter
         )
         presenter.takeView(this)
     }
 
+    private fun setUpAdapter() {
+        articleAdapter = ArticleAdapter(
+                PicassoImageLoader(), object : OnArticleClickListener {
+            override fun onArticleClicked(article: Article) {
+                presenter.onArticleClicked(article)
+            }
+        },
+                DateFormatterImpl()
+        )
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpAdapter()
         presenter.onViewReady()
         refresh_layout.setOnRefreshListener(this)
         list.layoutManager = LinearLayoutManager(activity)
@@ -75,14 +89,16 @@ class NewsListFragment : BaseFragment(), NewsListContract.View, SwipeRefreshLayo
     }
 
     override fun startDetailsActivity(article: Article) {
-        startActivity(NewsDetailsActivity.createIntent(activity).putExtra(
-                Article.ARTICLE, article as Serializable
+        startActivity(NewsDetailsActivity.createIntent(activity, article).putExtra(
+                KEY_ARTICLE, article as Serializable
         ))
     }
 
     override fun layoutRes() = R.layout.fragment_main
 
     companion object {
+        const val KEY_ARTICLE = "key.article"
+
         fun newInstance(): NewsListFragment {
             return NewsListFragment()
         }

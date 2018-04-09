@@ -1,7 +1,7 @@
 package com.example.bartusis.petras.newsapp.main.main.base.data
 
-import com.example.bartusis.petras.newsapp.main.main.newsList.Article
-import com.example.bartusis.petras.newsapp.main.main.newsList.News
+import com.example.bartusis.petras.newsapp.main.main.news.Article
+import com.example.bartusis.petras.newsapp.main.main.news.News
 
 interface PreferenceManager {
     fun getNews() : News
