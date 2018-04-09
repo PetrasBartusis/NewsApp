@@ -18,7 +18,8 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = NewsDetailsPresenter()
+        val model = NewsDetailsModel()
+        presenter = NewsDetailsPresenter(model)
         presenter.takeView(this)
     }
 
@@ -28,7 +29,7 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
     }
 
     override fun setArticleData() {
-        val article = arguments.getSerializable(Article.ARTICLE) as Article
+        val article = NewsDetailsModel().getArticle(arguments)
         if(article.urlToImage!=null){
             GlideImageLoader().loadFullImage(
                     article.urlToImage.toString(),
@@ -59,7 +60,7 @@ class NewsDetailsFragment : BaseFragment(), NewsDetailsContract.View {
     override fun layoutRes() = R.layout.fragment_details
 
     companion object {
-        fun newInstance(): NewsDetailsFragment {
+        fun newInstance(): NewsDetailsFragment { // TODO create bundle and set arguments here
             return NewsDetailsFragment()
         }
     }

@@ -13,13 +13,12 @@ class NewsListPresenterTest {
 
     @Before
     fun setUp() {
-//        presenter = NewsListPresenter()
+
     }
 
     @Test
     fun onViewReady_bulveIsSkani_viewThanksPetras() {
         // assign
-        val bulviuKose = BulviuKose(true)
         //Mockito.`when`(model.getBulviuKose()).thenReturn(bulviuKose)
 
         // act
@@ -32,7 +31,6 @@ class NewsListPresenterTest {
     @Test
     fun onViewReady_bulveIsNotSkani_viewThanksPetras() {
         // assign
-        val bulviuKose = BulviuKose(false)
         //Mockito.`when`(model.getBulviuKose()).thenReturn(bulviuKose)
 
         // act

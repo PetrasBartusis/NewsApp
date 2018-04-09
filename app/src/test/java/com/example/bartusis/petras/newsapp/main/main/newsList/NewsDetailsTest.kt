@@ -1,43 +1,40 @@
 package com.example.bartusis.petras.newsapp.main.main.newsList
 
 import com.example.bartusis.petras.newsapp.main.main.newsDetails.NewsDetailsContract
+import com.example.bartusis.petras.newsapp.main.main.newsDetails.NewsDetailsPresenter
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
+import org.mockito.Mockito.verify
+import java.net.URL
 
 class NewsDetailsTest {
     private val view = Mockito.mock(NewsDetailsContract.View::class.java)
-    private lateinit var presenter: NewsListPresenter
+    private val model = Mockito.mock(NewsDetailsContract.Model::class.java)
+    private lateinit var presenter: NewsDetailsPresenter
 
     @Before
     fun setUp() {
-//        presenter = NewsListPresenter()
+        presenter = NewsDetailsPresenter()
     }
 
     @Test
-    fun onViewReady_bulveIsSkani_viewThanksPetras() {
-        // assign
-        val bulviuKose = BulviuKose(true)
-        //Mockito.`when`(model.getBulviuKose()).thenReturn(bulviuKose)
-
+    fun onViewReady_setArticleData() {
+        Mockito.`when`(model.getArticle()).thenReturn(
+                Article(
+                Source("1", "test_name"),
+                "test_author",
+                "test_title",
+                "test_description",
+                URL("http://www.test.com"),
+                URL("http://www.test.com/image"),
+                "2018-04-08T07:25:00Z"
+            )
+        )
         // act
         presenter.onViewReady()
 
         // assert
-        //verify(view).thankPetras()
-    }
-
-    @Test
-    fun onViewReady_bulveIsNotSkani_viewThanksPetras() {
-        // assign
-        val bulviuKose = BulviuKose(false)
-        //Mockito.`when`(model.getBulviuKose()).thenReturn(bulviuKose)
-
-        // act
-        presenter.onViewReady()
-
-        // assert
-        //verify(view).petrasyouliedtousaboutbulviukose()
-        //verify(view, never()).thankPetras()
+        verify(view).setArticleData()
     }
 }

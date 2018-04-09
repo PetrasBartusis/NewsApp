@@ -3,7 +3,7 @@ package com.example.bartusis.petras.newsapp.main.main.base
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DateFormatterImpl : DateFormatter {
+class DateFormatterImpl : DateFormatter { // TODO fix name and package
     private val baseFormat = SimpleDateFormat("yyyy-MMMM-dd HH:mm", Locale.ROOT)
     var givenFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ROOT)
 
